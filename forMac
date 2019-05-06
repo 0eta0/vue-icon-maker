@@ -1,0 +1,10 @@
+{
+    platform: 'mac',
+    config: {
+        'appId': 'com.sarumatu.vue-icon-maker',
+        'mac':{
+            'target': 'dmg',
+	    "icon": "./build/icon.png"
+        }
+    }
+}
