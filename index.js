@@ -1,11 +1,26 @@
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
+
+const menu = Menu.buildFromTemplate([
+  {
+    label: "IconMaker",
+    submenu: [
+      { label: "About App", selector: "orderFrontStandardAboutPanel:" },
+      {
+        label: "Quit",
+        accelerator: "CmdOrCtrl+Q",
+        click: function() {
+          app.quit();
+        }
+      }
+    ]
+  }
+]);
 
 app.on("window-all-closed", function() {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+  app.quit();
 });
 
 app.on("ready", function() {
@@ -16,9 +31,7 @@ app.on("ready", function() {
       nodeIntegration: true
     }
   });
-  mainWindow.loadURL("file://" + __dirname + "/index.html");
 
-  mainWindow.on("closed", function() {
-    mainWindow = null;
-  });
+  Menu.setApplicationMenu(menu);
+  mainWindow.loadURL("file://" + __dirname + "/index.html");
 });
